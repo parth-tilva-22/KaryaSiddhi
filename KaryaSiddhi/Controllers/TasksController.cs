@@ -11,11 +11,10 @@ namespace KaryaSiddhi.Controllers
     [Route("[controller]")]
     public class TasksController : ControllerBase
     {
-        private readonly TaskService taskService;
+        private readonly TaskService taskService = new TaskService();   
 
-        public TasksController(TaskService taskService)
+        public TasksController()
         {
-            this.taskService = taskService;
         }
 
         [HttpGet]

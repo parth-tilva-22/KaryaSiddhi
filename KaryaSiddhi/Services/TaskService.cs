@@ -6,11 +6,14 @@ namespace KaryaSiddhi.Services
 {
     public class TaskService
     {
-        private readonly TaskRepository taskRepository;
 
-        public TaskService(TaskRepository taskRepository) 
+        
+        private readonly TaskRepository taskRepository = new TaskRepository();
+       
+
+        public TaskService() 
         {
-            this.taskRepository = taskRepository;
+            
         }
 
 

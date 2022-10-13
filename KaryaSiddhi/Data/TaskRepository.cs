@@ -7,9 +7,12 @@ namespace KaryaSiddhi.Data
     {
         private readonly KaryaSiddhiDbContext karyaSiddhiDbContext;
 
-        public TaskRepository(KaryaSiddhiDbContext karyaSiddhiDbContext)
+        public TaskRepository()
         {
-            this.karyaSiddhiDbContext = karyaSiddhiDbContext;
+            var connectionstring = "server=MRIPF2RCVFG;database=KaryaSiddhiDb;Trusted_Connection=true";
+            var optionsBuilder = new DbContextOptionsBuilder<KaryaSiddhiDbContext>();
+            optionsBuilder.UseSqlServer(connectionstring);
+            karyaSiddhiDbContext = new KaryaSiddhiDbContext(optionsBuilder.Options);
         }
 
         public async Task<List<Task>> GetAllTasks() =>  await karyaSiddhiDbContext.Tasks.ToListAsync(); 

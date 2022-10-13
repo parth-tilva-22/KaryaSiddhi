@@ -6,6 +6,8 @@ namespace KaryaSiddhi.Data
 {
     public class KaryaSiddhiDbContext : DbContext
     {
+
+
         public KaryaSiddhiDbContext(DbContextOptions options) : base(options)
         {
 

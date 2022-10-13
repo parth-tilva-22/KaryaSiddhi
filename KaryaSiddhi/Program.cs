@@ -14,6 +14,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<KaryaSiddhiDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("KaryaSiddhiConnectionString")));
 
+
 var app = builder.Build();
 
 app.UseCors(builder =>
@@ -36,5 +37,5 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-
+//pp.CreateDbIfNotExists();
 app.Run();
