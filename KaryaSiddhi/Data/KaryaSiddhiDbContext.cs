@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using KaryaSiddhi.Models;
-
+using Task = KaryaSiddhi.Models.Task;
 
 namespace KaryaSiddhi.Data
 {
@@ -8,8 +8,9 @@ namespace KaryaSiddhi.Data
     {
         public KaryaSiddhiDbContext(DbContextOptions options) : base(options)
         {
+
         }
 
-        public DbSet<Models.Task> Tasks { get; set; }
+        public DbSet<Task> Tasks { get; set; }
     }
 }

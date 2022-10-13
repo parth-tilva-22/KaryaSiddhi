@@ -1,50 +1,26 @@
-﻿using Task = KaryaSiddhi.Models.Task;
+﻿using KaryaSiddhi.Data;
+using Task = KaryaSiddhi.Models.Task;
+
 
 namespace KaryaSiddhi.Services
 {
     public class TaskService
     {
-        static List<Task> Tasks { get; set; }
-        static TaskService()
+        private readonly TaskRepository taskRepository;
+
+        public TaskService(TaskRepository taskRepository) 
         {
-            Tasks = new List<Task>
-            {
-                new Task {
-                    Title= "Test the webapi created with asp.net",
-                    Description= "This data is coming from in-memory data caching service A further longer description is possible.",
-                    DueDate= "26th aug 2022",
-                    IsComplete= true,
-                    Priority= 1,
-                },new Task {
-                    Title= "Completed budgeting for FY 2023",
-                    Description= "This data is coming from in-memory data caching service is required by the finance depeartment. A further longer description is possible.",
-                    DueDate= "26th aug 2022",
-                    IsComplete= true,
-                    Priority= 1,
-                },new Task {
-                    Title= "Completed budgeting for FY 2023",
-                    Description= "Budgeting for FY 2023 this is required by the finance depeartment. A further longer description is possible.",
-                    DueDate= "26th aug 2022",
-                    IsComplete= true,
-                    Priority= 1,
-                },new Task {
-                    Title= "Completed budgeting for FY 2023",
-                    Description= "Budgeting for FY 2023 this is required by the finance depeartment. A further longer description is possible.",
-                    DueDate= "26th aug 2022",
-                    IsComplete= true,
-                    Priority= 1,
-                },new Task {
-                    Title= "Completed budgeting for FY 2023",
-                    Description= "Budgeting for FY 2023 this is required by the finance depeartment. A further longer description is possible.",
-                    DueDate= "26th aug 2022",
-                    IsComplete= true,
-                    Priority= 1,
-                },
-
-            };
-
+            this.taskRepository = taskRepository;
         }
 
-        public static List<Task> GetAll() => Tasks;
+
+        public async Task<List<Task>> GetAllTasks() => await taskRepository.GetAllTasks();
+        
+        public async Task<Task> AddTask(Task task)
+        {
+            task.Id = Guid.NewGuid();
+            var responseTask = await taskRepository.AddTask(task);
+            return task;
+        }
     }
 }
