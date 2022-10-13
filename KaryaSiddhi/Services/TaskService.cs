@@ -10,7 +10,6 @@ namespace KaryaSiddhi.Services
         
         private readonly TaskRepository taskRepository = new TaskRepository();
        
-
         public TaskService() 
         {
             
@@ -18,7 +17,9 @@ namespace KaryaSiddhi.Services
 
 
         public async Task<List<Task>> GetAllTasks() => await taskRepository.GetAllTasks();
-        
+
+        public async Task<Task?> getTask(Guid id) => await taskRepository.getTask(id);
+
         public async Task<Task> AddTask(Task task)
         {
             task.Id = Guid.NewGuid();

@@ -15,6 +15,7 @@ namespace KaryaSiddhi.Controllers
 
         public TasksController()
         {
+
         }
 
         [HttpGet]
@@ -23,7 +24,16 @@ namespace KaryaSiddhi.Controllers
         [HttpPost]
         public async Task<IActionResult> AddTask([FromBody] Task task) => Ok(await taskService.AddTask(task));
 
-
+        [HttpGet("{id:Guid}")]
+        public async Task<IActionResult> getTask([FromRoute] Guid id) 
+        {
+            var task = await taskService.getTask(id);   
+            if (task == null)
+            {
+                return NotFound();
+            }
+            return Ok(task);
+        }
 
 
 
@@ -57,17 +67,7 @@ namespace KaryaSiddhi.Controllers
         //}
 
 
-        //[HttpGet("{id:Guid}")]
-        //public async Task<IActionResult> getTask([FromRoute] Guid id)
-        //{
-        //    var task = await karyaSiddhiDbContext.Tasks.FirstOrDefaultAsync(t => t.Id == id);
-        //    if (task == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return Ok(task);
 
-        //}
 
         //[Route("[action]/{statusOfTask}")]
         //[HttpGet]

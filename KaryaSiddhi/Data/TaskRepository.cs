@@ -15,7 +15,9 @@ namespace KaryaSiddhi.Data
             karyaSiddhiDbContext = new KaryaSiddhiDbContext(optionsBuilder.Options);
         }
 
-        public async Task<List<Task>> GetAllTasks() =>  await karyaSiddhiDbContext.Tasks.ToListAsync(); 
+        public async Task<List<Task>> GetAllTasks() =>  await karyaSiddhiDbContext.Tasks.ToListAsync();
+
+        public async Task<Task?> getTask(Guid id) => await karyaSiddhiDbContext.Tasks.FirstOrDefaultAsync(t => t.Id == id);
 
         public async Task<Task> AddTask(Task task)
         {
@@ -23,6 +25,8 @@ namespace KaryaSiddhi.Data
             await karyaSiddhiDbContext.SaveChangesAsync();
             return task;
         }
+
+       
 
 
     }
