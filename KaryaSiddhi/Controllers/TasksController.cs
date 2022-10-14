@@ -36,37 +36,28 @@ namespace KaryaSiddhi.Controllers
         }
 
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteTask(Guid id)
+        {
+            var task = await taskService.DeleteTask(id);    
+            if (task == null)
+            {
+                return NotFound();
+            }
+            return Ok(task);
+        }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeleteTask(Guid id)
-        //{
-        //    var task = await karyaSiddhiDbContext.Tasks.FirstOrDefaultAsync(x => x.Id == id);
-        //    if(task == null)
-        //    {
-        //        return NotFound();  
-        //    }
-        //    var removedTask = karyaSiddhiDbContext.Tasks.Remove(task);
-        //    return Ok(removedTask);    
-        //}
-
-
+        [HttpPut("{id:Guid}")]
+        public async Task<IActionResult> UpdateTask([FromRoute] Guid id, Task task)
+        {
+            Task updatedTask = await taskService.UpdateTask(id, task);
+            if (updatedTask == null)
+            {
+                return NotFound();
+            }
+            return Ok(updatedTask);
+        }
 
 
         //[Route("[action]/{statusOfTask}")]
